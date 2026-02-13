@@ -1,0 +1,65 @@
+{
+  "cli": {
+    "version": ">= 18.0.1",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "e2e-test": {
+      "withoutCredentials": true,
+      "environment": "development",
+      "env": {
+        "EXPO_PUBLIC_ANDROID_APP_ID": "com.simoncnielsen.expoe2eexample.e2e",
+        "EXPO_PUBLIC_IOS_APP_ID": "com.simoncnielsen.expoe2eexample.e2e",
+        "EXPO_PUBLIC_APP_NAME": "Expo E2E (E2E)",
+        "EXPO_PUBLIC_BACKEND_URL": "qa.simoncnielsen.com",
+        "APP_PROFILE": "e2e-test"
+      },
+      "android": {
+        "buildType": "apk"
+      },
+      "ios": {
+        "simulator": true
+      }
+    },
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "env": {
+        "EXPO_PUBLIC_ANDROID_APP_ID": "com.simoncnielsen.expoe2eexample.dev",
+        "EXPO_PUBLIC_IOS_APP_ID": "com.simoncnielsen.expoe2eexample.dev",
+        "EXPO_PUBLIC_APP_NAME": "Expo E2E (Dev)",
+        "EXPO_PUBLIC_BACKEND_URL": "qa.simoncnielsen.com",
+        "APP_PROFILE": "development"
+      },
+      "ios": {
+        "enterpriseProvisioning": "adhoc"
+      }
+    },
+    "qa": {
+      "distribution": "internal",
+      "env": {
+        "EXPO_PUBLIC_ANDROID_APP_ID": "com.simoncnielsen.expoe2eexample.qa",
+        "EXPO_PUBLIC_IOS_APP_ID": "com.simoncnielsen.expoe2eexample.qa",
+        "EXPO_PUBLIC_APP_NAME": "Expo E2E (QA)",
+        "EXPO_PUBLIC_BACKEND_URL": "qa.simoncnielsen.com",
+        "APP_PROFILE": "qa"
+      },
+      "ios": {
+        "enterpriseProvisioning": "adhoc"
+      }
+    },
+    "production": {
+      "autoIncrement": false,
+      "env": {
+        "EXPO_PUBLIC_ANDROID_APP_ID": "com.simoncnielsen.expoe2eexample",
+        "EXPO_PUBLIC_IOS_APP_ID": "com.simoncnielsen.expoe2eexample",
+        "EXPO_PUBLIC_APP_NAME": "Expo E2E",
+        "EXPO_PUBLIC_BACKEND_URL": "simoncnielsen.com",
+        "APP_PROFILE": "production"
+      }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}
