@@ -1,12 +1,13 @@
 {
   "name": "expo-e2e-example",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "main": "index.tsx",
   "scripts": {
     "start": "expo start --dev-client",
     "web": "expo start --web",
     "android": "expo run:android",
-    "ios": "expo run:ios"
+    "ios": "expo run:ios",
+    "e2e:android": "APP_PROFILE=e2e-test npx expo run:android"
   },
   "dependencies": {
     "@expo/metro-runtime": "~6.1.2",
