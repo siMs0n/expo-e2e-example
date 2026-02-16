@@ -5,6 +5,7 @@ import {
 import {
   CompositeScreenProps,
   createStaticNavigation,
+  NavigatorScreenParams,
   StaticParamList,
 } from "@react-navigation/native";
 import {
@@ -12,14 +13,15 @@ import {
   NativeStackScreenProps,
 } from "@react-navigation/native-stack";
 import { Image } from "react-native";
-import bell from "../assets/bell.png";
-import newspaper from "../assets/newspaper.png";
+import home from "../assets/home.png";
+import building from "../assets/building.png";
 import { Home } from "./screens/Home";
 import { NotFound } from "./screens/NotFound";
 import { WebView } from "./screens/WebView";
 import { useIsSignedIn, useIsSignedOut } from "../auth/AuthContext";
 import { Login } from "./screens/Login";
 import { BankIDAuth } from "./screens/BankIDAuth";
+import { Registration } from "./screens/Registration";
 
 export type HomeTabParamList = {
   Home: undefined;
@@ -40,7 +42,7 @@ function HomeTabs() {
           title: "Home",
           tabBarIcon: ({ color, size }) => (
             <Image
-              source={newspaper}
+              source={home}
               tintColor={color}
               style={{
                 width: size,
@@ -56,7 +58,7 @@ function HomeTabs() {
         options={{
           tabBarIcon: ({ color, size }) => (
             <Image
-              source={bell}
+              source={building}
               tintColor={color}
               style={{
                 width: size,
@@ -91,6 +93,13 @@ const RootStack = createNativeStackNavigator({
         headerShown: false,
       },
     },
+    Registration: {
+      if: useIsSignedIn,
+      screen: Registration,
+      options: {
+        title: "Registration",
+      },
+    },
     NotFound: {
       screen: NotFound,
       options: {
@@ -105,7 +114,13 @@ const RootStack = createNativeStackNavigator({
 
 export const Navigation = createStaticNavigation(RootStack);
 
-export type RootStackParamList = StaticParamList<typeof RootStack>;
+export type RootStackParamList = {
+  Login: undefined;
+  BankIDAuth: undefined;
+  Registration: undefined;
+  HomeTabs: NavigatorScreenParams<HomeTabParamList>;
+  NotFound: undefined;
+};
 
 export type RootStackScreenProps<T extends keyof RootStackParamList> =
   NativeStackScreenProps<RootStackParamList, T>;

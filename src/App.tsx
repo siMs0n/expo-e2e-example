@@ -14,8 +14,9 @@ export const queryClient = new QueryClient();
 
 Asset.loadAsync([
   ...NavigationAssets,
-  require("./assets/newspaper.png"),
-  require("./assets/bell.png"),
+  require("./assets/mood-check.png"),
+  require("./assets/home.png"),
+  require("./assets/building.png"),
 ]);
 
 SplashScreen.preventAutoHideAsync();

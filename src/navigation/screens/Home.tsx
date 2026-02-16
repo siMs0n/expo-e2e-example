@@ -1,14 +1,22 @@
 import { Button, Text } from "react-native";
 import { StyleSheet, View } from "react-native";
 import { HomeTabScreenProps } from "..";
-import { useQuery } from "@tanstack/react-query";
-import { fetchUserAccount } from "../../api/user-api";
+import { useUser } from "../../api/useUser";
+import { NotFoundError } from "../../api/user-api";
+import { useEffect } from "react";
 
 export function Home({ navigation }: HomeTabScreenProps<"Home">) {
-  const { data, isLoading } = useQuery({
-    queryKey: ["account"],
-    queryFn: fetchUserAccount,
-  });
+  const { data, error, isLoading } = useUser();
+
+  useEffect(() => {
+    const isNotFound = error instanceof NotFoundError;
+
+    if (isNotFound) {
+      navigation.navigate("Registration");
+    } else if (error) {
+      console.error("Error fetching user account: ", error);
+    }
+  }, [error, navigation]);
 
   return (
     <View style={styles.container}>

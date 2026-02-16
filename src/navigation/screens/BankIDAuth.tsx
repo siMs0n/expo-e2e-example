@@ -17,7 +17,11 @@ export function BankIDAuth() {
   if (envConfig.appProfile === "e2e-test") {
     return (
       <View style={{ marginTop: 100 }}>
-        <Button title="Simulate BankID Login" onPress={signInWithFakeTokens} />
+        <Button
+          testID="login_mock"
+          title="Simulate BankID Login"
+          onPress={signInWithFakeTokens}
+        />
       </View>
     );
   }
