@@ -1,24 +1,31 @@
-import { Button, Text } from "@react-navigation/elements";
-import { useEffect } from "react";
+import { Button, Text } from "react-native";
 import { StyleSheet, View } from "react-native";
+import { HomeTabScreenProps } from "..";
+import { useQuery } from "@tanstack/react-query";
+import { fetchUserAccount } from "../../api/user-api";
 
-export function Home() {
-  useEffect(() => {
-    fetch("https://e2e.simoncnielsen.com/api/v1/account")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Account data:", data);
-      });
-  }, []);
+export function Home({ navigation }: HomeTabScreenProps<"Home">) {
+  const { data, isLoading } = useQuery({
+    queryKey: ["account"],
+    queryFn: fetchUserAccount,
+  });
 
   return (
     <View style={styles.container}>
-      <Text>Home Screen</Text>
-      <Text>Open up 'src/App.tsx' to start working on your app!</Text>
-      <Button screen="Profile" params={{ user: "jane" }}>
-        Go to Profile
-      </Button>
-      <Button screen="Settings">Go to Settings</Button>
+      {isLoading && <Text>Loading...</Text>}
+      {data && <Text>Hello {data.name}!</Text>}
+      <Button
+        title="Open first link"
+        onPress={() =>
+          navigation.navigate("WebView", { urlSuffix: "first-link" })
+        }
+      />
+      <Button
+        title="Open second link"
+        onPress={() =>
+          navigation.navigate("WebView", { urlSuffix: "second-link" })
+        }
+      />
     </View>
   );
 }

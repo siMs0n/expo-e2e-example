@@ -7,6 +7,10 @@ import { useColorScheme } from "react-native";
 import { Navigation } from "./navigation";
 import { useSetupMsw } from "../test/useSetupMsw";
 import { envConfig } from "../env";
+import { AuthProvider } from "./auth/AuthContext";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+export const queryClient = new QueryClient();
 
 Asset.loadAsync([
   ...NavigationAssets,
@@ -38,14 +42,18 @@ export function App() {
   }
 
   return (
-    <Navigation
-      theme={theme}
-      linking={{
-        prefixes: linkingPrefixes,
-      }}
-      onReady={() => {
-        SplashScreen.hideAsync();
-      }}
-    />
+    <AuthProvider>
+      <QueryClientProvider client={queryClient}>
+        <Navigation
+          theme={theme}
+          linking={{
+            prefixes: linkingPrefixes,
+          }}
+          onReady={() => {
+            SplashScreen.hideAsync();
+          }}
+        />
+      </QueryClientProvider>
+    </AuthProvider>
   );
 }

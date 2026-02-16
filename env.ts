@@ -16,5 +16,6 @@ export const envConfig = {
       : Constants.expoConfig?.ios?.buildNumber,
   appName: easEnv.EXPO_PUBLIC_APP_NAME,
   backendUrl: easEnv.EXPO_PUBLIC_BACKEND_URL,
+  partnerUrl: easEnv.EXPO_PUBLIC_PARTNER_URL,
   appProfile: appProfile,
 };

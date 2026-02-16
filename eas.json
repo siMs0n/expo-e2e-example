@@ -11,7 +11,8 @@
         "EXPO_PUBLIC_ANDROID_APP_ID": "com.simoncnielsen.expoe2eexample.e2e",
         "EXPO_PUBLIC_IOS_APP_ID": "com.simoncnielsen.expoe2eexample.e2e",
         "EXPO_PUBLIC_APP_NAME": "Expo E2E (E2E)",
-        "EXPO_PUBLIC_BACKEND_URL": "qa.simoncnielsen.com",
+        "EXPO_PUBLIC_BACKEND_URL": "apie2e.example.com",
+        "EXPO_PUBLIC_PARTNER_URL": "partnere2e.example.com",
         "APP_PROFILE": "e2e-test"
       },
       "android": {
@@ -28,7 +29,8 @@
         "EXPO_PUBLIC_ANDROID_APP_ID": "com.simoncnielsen.expoe2eexample.dev",
         "EXPO_PUBLIC_IOS_APP_ID": "com.simoncnielsen.expoe2eexample.dev",
         "EXPO_PUBLIC_APP_NAME": "Expo E2E (Dev)",
-        "EXPO_PUBLIC_BACKEND_URL": "qa.simoncnielsen.com",
+        "EXPO_PUBLIC_BACKEND_URL": "apiqa.example.com",
+        "EXPO_PUBLIC_PARTNER_URL": "partnerqa.example.com",
         "APP_PROFILE": "development"
       },
       "ios": {
@@ -41,7 +43,8 @@
         "EXPO_PUBLIC_ANDROID_APP_ID": "com.simoncnielsen.expoe2eexample.qa",
         "EXPO_PUBLIC_IOS_APP_ID": "com.simoncnielsen.expoe2eexample.qa",
         "EXPO_PUBLIC_APP_NAME": "Expo E2E (QA)",
-        "EXPO_PUBLIC_BACKEND_URL": "qa.simoncnielsen.com",
+        "EXPO_PUBLIC_BACKEND_URL": "apiqa.example.com",
+        "EXPO_PUBLIC_PARTNER_URL": "partnerqa.example.com",
         "APP_PROFILE": "qa"
       },
       "ios": {
@@ -54,7 +57,8 @@
         "EXPO_PUBLIC_ANDROID_APP_ID": "com.simoncnielsen.expoe2eexample",
         "EXPO_PUBLIC_IOS_APP_ID": "com.simoncnielsen.expoe2eexample",
         "EXPO_PUBLIC_APP_NAME": "Expo E2E",
-        "EXPO_PUBLIC_BACKEND_URL": "simoncnielsen.com",
+        "EXPO_PUBLIC_BACKEND_URL": "api.example.com",
+        "EXPO_PUBLIC_PARTNER_URL": "partner.example.com",
         "APP_PROFILE": "production"
       }
     }
