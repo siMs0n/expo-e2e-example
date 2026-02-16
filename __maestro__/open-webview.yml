@@ -1,0 +1,27 @@
+appId: com.simoncnielsen.expoe2eexample.e2e
+---
+#Log in and open the webview
+
+- launchApp
+
+- runFlow:
+    file: workflows/reset-e2e.yml
+
+- runFlow:
+    file: workflows/login-mock.yml
+
+- tapOn: "WebView"
+
+- assertVisible: "https://partnere2e.example.com/default-link"
+
+- tapOn: "Home"
+
+- tapOn: "Open first link"
+
+- assertVisible: "https://partnere2e.example.com/first-link"
+
+- tapOn: "Home"
+
+- tapOn: "Open second link"
+
+- assertVisible: "https://partnere2e.example.com/second-link"

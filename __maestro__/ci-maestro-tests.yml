@@ -1,0 +1,10 @@
+appId: com.capio.online.e2e
+---
+# Run all Maestro e2e tests in sequence
+# This assumes the e2e app is built and installed
+
+- runFlow:
+    file: registration-flow.yml
+
+- runFlow:
+    file: open-webview.yml

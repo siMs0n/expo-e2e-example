@@ -1,0 +1,12 @@
+appId: com.simoncnielsen.expoe2eexample.e2e
+---
+- waitForAnimationToEnd
+
+- tapOn:
+    id: logo
+
+- tapOn:
+    id: reset-backend
+
+- tapOn:
+    id: close-e2e-modal

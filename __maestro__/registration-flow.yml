@@ -1,0 +1,33 @@
+appId: com.simoncnielsen.expoe2eexample.e2e
+---
+# Test the user registration flow
+
+- launchApp
+
+- tapOn:
+    id: logo
+- tapOn:
+    id: reset-backend
+- tapOn:
+    id: set-new-user
+- tapOn:
+    id: close-e2e-modal
+
+- runFlow:
+    file: workflows/login-mock.yml
+
+# Wait for registration screen to be visible
+- assertVisible: "Registration"
+
+# Fill in phone number
+- tapOn: "Enter your phone number"
+- inputText: "+1234567890"
+
+# Accept terms and conditions
+- tapOn: "I accept the terms and conditions"
+
+# Submit registration
+- tapOn: "Register"
+
+# Assert successful navigation to Home screen
+- assertVisible: "Hej Simon!"

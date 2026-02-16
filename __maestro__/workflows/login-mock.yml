@@ -1,0 +1,9 @@
+appId: com.simoncnielsen.expoe2eexample.e2e
+---
+- waitForAnimationToEnd
+
+- assertVisible: "Login Screen"
+- tapOn: "Login with BankID"
+
+- tapOn:
+    id: login_mock
