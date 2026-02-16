@@ -3,6 +3,7 @@ import { apiClient } from "./api-client";
 export type UserAccount = {
   name: string;
   phoneNumber: string;
+  phoneNumberVerified: boolean;
   termsAccepted: boolean;
 };
 
@@ -39,4 +40,12 @@ export const createUserAccount = async (account: {
     )
     .json<UserAccount>();
   return data;
+};
+
+export const requestPhoneVerification = async (): Promise<void> => {
+  await apiClient.post({}, "/account/validatephone/request").text();
+};
+
+export const verifyPhoneCode = async (code: string): Promise<void> => {
+  await apiClient.post({ code }, "/account/validatephone/verify").text();
 };

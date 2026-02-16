@@ -1,0 +1,54 @@
+appId: com.simoncnielsen.expoe2eexample.dev
+---
+# Test the phone verification flow
+
+- launchApp
+
+- tapOn:
+    id: logo
+- tapOn:
+    id: reset-backend
+- tapOn:
+    id: set-phone-unverified
+- tapOn:
+    id: close-e2e-modal
+
+- runFlow:
+    file: helpers/login-mock.yml
+
+# Wait for Home screen to be visible
+- assertVisible: "Hello Simon!"
+
+# Assert that verification prompt is visible
+- assertVisible: "Please verify your phone number"
+
+# Tap on verify phone number button
+- tapOn:
+    id: verify-phone-button
+
+# Assert that the modal opened
+- assertVisible: "Verify Phone Number"
+
+# Tap Send Code button
+- tapOn: "Send Code"
+
+# Assert OTP input screen is visible
+- assertVisible: "Enter Verification Code"
+- assertVisible: "Enter the 6-digit code sent to your phone"
+
+# Enter OTP code
+- tapOn:
+    id: otp-input
+- inputText: "123456"
+
+# Submit the OTP
+- tapOn: "Verify"
+
+# Assert success message
+- assertVisible: "✓ Success!"
+
+# Wait for modal to close automatically
+- waitForAnimationToEnd
+
+# Assert verification prompt is no longer visible
+- assertNotVisible: "Please verify your phone number"

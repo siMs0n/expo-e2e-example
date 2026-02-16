@@ -14,7 +14,7 @@ appId: com.simoncnielsen.expoe2eexample.e2e
     id: close-e2e-modal
 
 - runFlow:
-    file: workflows/login-mock.yml
+    file: helpers/login-mock.yml
 
 # Wait for registration screen to be visible
 - assertVisible: "Registration"

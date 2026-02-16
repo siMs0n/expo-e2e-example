@@ -5,10 +5,10 @@ appId: com.simoncnielsen.expoe2eexample.e2e
 - launchApp
 
 - runFlow:
-    file: workflows/reset-e2e.yml
+    file: helpers/reset-e2e.yml
 
 - runFlow:
-    file: workflows/login-mock.yml
+    file: helpers/login-mock.yml
 
 - tapOn: "WebView"
 

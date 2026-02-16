@@ -7,7 +7,7 @@ export const setAuthToken = (token: string | null) => {
   authToken = token;
 };
 
-export const apiClient = wretch(`https://${envConfig.backendUrl}/api/v1`)
+export const apiClient = wretch(`https://${envConfig.backendUrl}/v1`)
   .headers({
     "Content-Type": "application/json",
   })

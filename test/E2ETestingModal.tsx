@@ -56,6 +56,14 @@ export const E2ETestingModal = ({
             >
               <Text style={styles.buttonText}>Set New User</Text>
             </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={setPhoneUnverified}
+              testID="set-phone-unverified"
+              style={styles.button}
+            >
+              <Text style={styles.buttonText}>Set Phone Unverified</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -69,6 +77,10 @@ const resetBackend = () => {
 
 const setNewUser = () => {
   fetch("http://localhost:4000/e2e-testing/new-user");
+};
+
+const setPhoneUnverified = () => {
+  fetch("http://localhost:4000/e2e-testing/set-phone-unverified");
 };
 
 const styles = StyleSheet.create({

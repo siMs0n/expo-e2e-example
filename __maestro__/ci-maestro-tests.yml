@@ -8,3 +8,6 @@ appId: com.capio.online.e2e
 
 - runFlow:
     file: open-webview.yml
+
+- runFlow:
+    file: phone-verification-flow.yml

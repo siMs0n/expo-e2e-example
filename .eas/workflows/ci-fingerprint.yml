@@ -1,0 +1,42 @@
+name: ci-fingerprint
+jobs:
+  fingerprint:
+    id: fingerprint
+    type: fingerprint
+    env:
+      APP_PROFILE: e2e-test
+
+  android_get_build:
+    needs: [fingerprint]
+    id: android_get_build
+    type: get-build
+    params:
+      fingerprint_hash: ${{ needs.fingerprint.outputs.android_fingerprint_hash }}
+      platform: android
+
+  android_repack:
+    needs: [android_get_build]
+    id: android_repack
+    if: ${{ needs.android_get_build.outputs.build_id }}
+    type: repack
+    params:
+      build_id: ${{ needs.android_get_build.outputs.build_id }}
+
+  android_build:
+    needs: [android_get_build]
+    id: android_build
+    if: ${{ !needs.android_get_build.outputs.build_id }}
+    type: build
+    params:
+      platform: android
+      profile: e2e-test
+
+  # Requires a paid plan from EAS
+  # android_maestro:
+  #   after: [android_repack, android_build]
+  #   id: android_maestro
+  #   type: maestro
+  #   image: latest
+  #   params:
+  #     build_id: ${{ needs.android_repack.outputs.build_id || needs.android_build.outputs.build_id }}
+  #     flow_path: ["__maestro__/ci-maestro-tests.yml"]
