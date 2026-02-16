@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   Modal,
   View,
@@ -13,6 +13,7 @@ import {
   useRequestPhoneVerification,
   useVerifyPhoneCode,
 } from "../api/usePhoneVerification";
+import { useQueryClient } from "@tanstack/react-query";
 
 type PhoneVerificationModalProps = {
   visible: boolean;
@@ -25,6 +26,7 @@ export function PhoneVerificationModal({
 }: PhoneVerificationModalProps) {
   const [step, setStep] = useState<"initial" | "otp" | "success">("initial");
   const [otpCode, setOtpCode] = useState("");
+  const queryClient = useQueryClient();
 
   const requestMutation = useRequestPhoneVerification();
   const verifyMutation = useVerifyPhoneCode();
@@ -47,7 +49,10 @@ export function PhoneVerificationModal({
     try {
       await verifyMutation.mutateAsync(otpCode);
       setStep("success");
+      // Wait 2 seconds before closing and invalidating the query
       setTimeout(() => {
+        // Invalidate query after showing success message
+        queryClient.invalidateQueries({ queryKey: ["account"] });
         handleClose();
       }, 2000);
     } catch (error) {
@@ -74,7 +79,7 @@ export function PhoneVerificationModal({
         <View style={styles.modal}>
           {step === "initial" && (
             <>
-              <Text style={styles.title}>Verify Phone Number</Text>
+              <Text style={styles.title}>Phone Number Verification</Text>
               <Text style={styles.message}>
                 We'll send you an SMS with a verification code to confirm your
                 phone number.

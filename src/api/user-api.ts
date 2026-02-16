@@ -49,3 +49,10 @@ export const requestPhoneVerification = async (): Promise<void> => {
 export const verifyPhoneCode = async (code: string): Promise<void> => {
   await apiClient.post({ code }, "/account/validatephone/verify").text();
 };
+
+export const updateUserAccount = async (
+  updates: Partial<Pick<UserAccount, "phoneNumber">>,
+): Promise<UserAccount> => {
+  const data = await apiClient.put(updates, "/account").json<UserAccount>();
+  return data;
+};

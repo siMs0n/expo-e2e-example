@@ -8,13 +8,7 @@ export const useRequestPhoneVerification = () => {
 };
 
 export const useVerifyPhoneCode = () => {
-  const queryClient = useQueryClient();
-
   return useMutation({
     mutationFn: (code: string) => verifyPhoneCode(code),
-    onSuccess: () => {
-      // Invalidate and refetch user account data
-      queryClient.invalidateQueries({ queryKey: ["account"] });
-    },
   });
 };

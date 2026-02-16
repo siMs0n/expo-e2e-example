@@ -1,0 +1,26 @@
+appId: com.simoncnielsen.expoe2eexample.dev
+---
+# Perform the phone verification flow
+
+# Tap on verify phone number button
+- tapOn: "Verify Phone Number"
+
+# Assert that the modal opened
+- assertVisible: "Phone Number Verification"
+
+# Tap Send Code button
+- tapOn: "Send Code"
+
+# Assert OTP input screen is visible
+- assertVisible: "Enter Verification Code"
+
+# Enter OTP code
+- tapOn:
+    id: otp-input
+- inputText: "123456"
+
+# Submit the OTP
+- tapOn: "Verify"
+
+# Wait for modal to close
+- waitForAnimationToEnd

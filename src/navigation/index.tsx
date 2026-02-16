@@ -15,9 +15,11 @@ import {
 import { Image } from "react-native";
 import home from "../assets/home.png";
 import building from "../assets/building.png";
+import user from "../assets/user.png";
 import { Home } from "./screens/Home";
 import { NotFound } from "./screens/NotFound";
 import { WebView } from "./screens/WebView";
+import { Profile } from "./screens/Profile";
 import { useIsSignedIn, useIsSignedOut } from "../auth/AuthContext";
 import { Login } from "./screens/Login";
 import { BankIDAuth } from "./screens/BankIDAuth";
@@ -28,6 +30,7 @@ export type HomeTabParamList = {
   WebView: {
     urlSuffix?: string;
   };
+  Profile: undefined;
 };
 
 const HomeTabNavigator = createBottomTabNavigator<HomeTabParamList>();
@@ -59,6 +62,23 @@ function HomeTabs() {
           tabBarIcon: ({ color, size }) => (
             <Image
               source={building}
+              tintColor={color}
+              style={{
+                width: size,
+                height: size,
+              }}
+            />
+          ),
+        }}
+      />
+      <HomeTabNavigator.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          title: "Profile",
+          tabBarIcon: ({ color, size }) => (
+            <Image
+              source={user}
               tintColor={color}
               style={{
                 width: size,

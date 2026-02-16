@@ -22,33 +22,38 @@ appId: com.simoncnielsen.expoe2eexample.dev
 # Assert that verification prompt is visible
 - assertVisible: "Please verify your phone number"
 
-# Tap on verify phone number button
+- runFlow:
+    file: sub-flows/verify-phone-number.yml
+
+# Assert verification prompt is no longer visible
+- assertNotVisible: "Please verify your phone number"
+
+# Navigate to Profile tab
+- tapOn: "Profile"
+
+# Assert Profile screen is visible
+- assertVisible: "Phone Number"
+
+# Update phone number
 - tapOn:
-    id: verify-phone-button
+    id: phone-input
+- eraseText
+- inputText: "+9876543210"
 
-# Assert that the modal opened
-- assertVisible: "Verify Phone Number"
+# Save the new phone number
+- tapOn: "Save"
 
-# Tap Send Code button
-- tapOn: "Send Code"
-
-# Assert OTP input screen is visible
-- assertVisible: "Enter Verification Code"
-- assertVisible: "Enter the 6-digit code sent to your phone"
-
-# Enter OTP code
-- tapOn:
-    id: otp-input
-- inputText: "123456"
-
-# Submit the OTP
-- tapOn: "Verify"
-
-# Assert success message
-- assertVisible: "✓ Success!"
-
-# Wait for modal to close automatically
+# Wait for save to complete
 - waitForAnimationToEnd
+
+# Save the new phone number
+- tapOn: "OK"
+
+# Assert that verification prompt appears after phone number change
+- assertVisible: "Please verify your phone number"
+
+- runFlow:
+    file: sub-flows/verify-phone-number.yml
 
 # Assert verification prompt is no longer visible
 - assertNotVisible: "Please verify your phone number"

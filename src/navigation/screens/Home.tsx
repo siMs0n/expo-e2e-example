@@ -3,12 +3,11 @@ import { StyleSheet, View } from "react-native";
 import { HomeTabScreenProps } from "..";
 import { useUser } from "../../api/useUser";
 import { NotFoundError } from "../../api/user-api";
-import { useEffect, useState } from "react";
-import { PhoneVerificationModal } from "../../components/PhoneVerificationModal";
+import { useEffect } from "react";
+import { PhoneVerificationPrompt } from "../../components/PhoneVerificationPrompt";
 
 export function Home({ navigation }: HomeTabScreenProps<"Home">) {
   const { data, error, isLoading } = useUser();
-  const [showVerificationModal, setShowVerificationModal] = useState(false);
 
   useEffect(() => {
     const isNotFound = error instanceof NotFoundError;
@@ -27,18 +26,9 @@ export function Home({ navigation }: HomeTabScreenProps<"Home">) {
       {isLoading && <Text>Loading...</Text>}
       {data && <Text>Hello {data.name}!</Text>}
 
-      {needsVerification && (
-        <View style={styles.verificationPrompt}>
-          <Text style={styles.verificationText}>
-            Please verify your phone number
-          </Text>
-          <Button
-            title="Verify Phone Number"
-            onPress={() => setShowVerificationModal(true)}
-            testID="verify-phone-button"
-          />
-        </View>
-      )}
+      <PhoneVerificationPrompt
+        visible={!!(data && !data.phoneNumberVerified)}
+      />
 
       <Button
         title="Open first link"
@@ -52,11 +42,6 @@ export function Home({ navigation }: HomeTabScreenProps<"Home">) {
           navigation.navigate("WebView", { urlSuffix: "second-link" })
         }
       />
-
-      <PhoneVerificationModal
-        visible={showVerificationModal}
-        onClose={() => setShowVerificationModal(false)}
-      />
     </View>
   );
 }
@@ -67,20 +52,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     gap: 10,
-  },
-  verificationPrompt: {
-    backgroundColor: "#fff3cd",
-    padding: 15,
-    borderRadius: 8,
-    alignItems: "center",
-    gap: 10,
-    marginVertical: 10,
-    borderWidth: 1,
-    borderColor: "#ffc107",
-  },
-  verificationText: {
-    fontSize: 16,
-    color: "#856404",
-    fontWeight: "500",
   },
 });
