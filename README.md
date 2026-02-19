@@ -33,3 +33,9 @@ You can modify the handlers in `/test/handlers.ts`
 ### Mocked backend service
 
 `/test/handlers.ts` is using MockAccountService for the /account endpoints to mock the backend saving data.
+
+## Maestro and EAS
+
+Maestro tests that should be run in the CI pipeline, for example in order to pass a PR, are located in `__maestro__/ci-maestro-tests.yml`.
+
+There are two [EAS workflows](https://docs.expo.dev/eas/workflows/introduction/) in `.eas/workflows`, one to run the Maestro tests and one to deploy the development and qa app with a new build or an EAS update. The workflows can be started with the EAS CLI in your pipeline of choice.
