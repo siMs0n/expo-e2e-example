@@ -4,6 +4,7 @@ import easConfig from "./eas.json";
 
 declare let process: {
   env: NodeJS.ProcessEnv & {
+    // Comes from build[<buildProfile>].env in eas.json when building with EAS Build, or from environment variables when running locally
     APP_PROFILE?: "e2e-test" | "development" | "qa" | "production";
   };
 };

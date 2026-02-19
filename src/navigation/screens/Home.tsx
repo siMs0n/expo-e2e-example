@@ -19,8 +19,6 @@ export function Home({ navigation }: HomeTabScreenProps<"Home">) {
     }
   }, [error, navigation]);
 
-  const needsVerification = data && !data.phoneNumberVerified;
-
   return (
     <View style={styles.container}>
       {isLoading && <Text>Loading...</Text>}

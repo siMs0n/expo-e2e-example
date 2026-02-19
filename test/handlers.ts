@@ -68,7 +68,7 @@ class MockAccountService {
     return this.account;
   }
   setAccount(account: any) {
-    this.account = account;
+    this.account = this.simpleDeepClone(account);
   }
   updateAccount(updatedAccount: any) {
     if (

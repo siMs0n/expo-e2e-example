@@ -1,12 +1,4 @@
-import {
-  Modal,
-  View,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  TextStyle,
-  ViewStyle,
-} from "react-native";
+import { Modal, View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { envConfig } from "../env";
 
 export const E2ETestingModal = ({

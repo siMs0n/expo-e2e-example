@@ -21,7 +21,7 @@ Asset.loadAsync([
 
 SplashScreen.preventAutoHideAsync();
 
-const linkingPrefixes = ["https://simoncnielsen.com"];
+const linkingPrefixes = ["https://example.com"];
 
 // To ease testing app links in local development
 if (
