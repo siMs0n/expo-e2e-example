@@ -1,0 +1,107 @@
+name: continuous-deploy
+jobs:
+  # Update or build dev app
+  fingerprint_dev:
+    id: fingerprint_dev
+    type: fingerprint
+    env:
+      APP_PROFILE: development
+
+  android_get_build_dev:
+    needs: [fingerprint_dev]
+    id: android_get_build_dev
+    type: get-build
+    params:
+      fingerprint_hash: ${{ needs.fingerprint_dev.outputs.android_fingerprint_hash }}
+      platform: android
+
+  ios_get_build_dev:
+    needs: [fingerprint_dev]
+    id: ios_get_build_dev
+    type: get-build
+    params:
+      fingerprint_hash: ${{ needs.fingerprint_dev.outputs.ios_fingerprint_hash }}
+      platform: ios
+
+  # If a build exists, update the channel; otherwise, create a new build
+  update_dev:
+    needs: [android_get_build_dev]
+    id: update_dev
+    if: ${{ needs.android_get_build_dev.outputs.build_id }}
+    name: Update Development Channel
+    type: update
+    params:
+      channel: development
+    env:
+      APP_PROFILE: development
+
+  android_build_dev:
+    needs: [android_get_build_dev]
+    id: android_build_dev
+    if: ${{ !needs.android_get_build_dev.outputs.build_id }}
+    type: build
+    params:
+      platform: android
+      profile: development
+
+  ios_build_dev:
+    needs: [ios_get_build_dev]
+    id: ios_build_dev
+    if: ${{ !needs.ios_get_build_dev.outputs.build_id }}
+    type: build
+    params:
+      platform: ios
+      profile: development
+
+  # Update or build qa app
+  fingerprint_qa:
+    id: fingerprint_qa
+    type: fingerprint
+    env:
+      APP_PROFILE: qa
+
+  android_get_build_qa:
+    needs: [fingerprint_qa]
+    id: android_get_build_qa
+    type: get-build
+    params:
+      fingerprint_hash: ${{ needs.fingerprint_qa.outputs.android_fingerprint_hash }}
+      platform: android
+
+  ios_get_build_qa:
+    needs: [fingerprint_qa]
+    id: ios_get_build_qa
+    type: get-build
+    params:
+      fingerprint_hash: ${{ needs.fingerprint_qa.outputs.ios_fingerprint_hash }}
+      platform: ios
+
+  # If a build exists, update the channel; otherwise, create a new build
+  update_qa:
+    needs: [android_get_build_qa]
+    id: update_qa
+    if: ${{ needs.android_get_build_qa.outputs.build_id }}
+    name: Update QA Channel
+    type: update
+    params:
+      channel: qa
+    env:
+      APP_PROFILE: qa
+
+  android_build_qa:
+    needs: [android_get_build_qa]
+    id: android_build_qa
+    if: ${{ !needs.android_get_build_qa.outputs.build_id }}
+    type: build
+    params:
+      platform: android
+      profile: qa
+
+  ios_build_qa:
+    needs: [ios_get_build_qa]
+    id: ios_build_qa
+    if: ${{ !needs.ios_get_build_qa.outputs.build_id }}
+    type: build
+    params:
+      platform: ios
+      profile: qa

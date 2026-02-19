@@ -1,4 +1,4 @@
-appId: com.capio.online.e2e
+appId: com.simoncnielsen.expoe2eexample.e2e
 ---
 # Run all Maestro e2e tests in sequence
 # This assumes the e2e app is built and installed
